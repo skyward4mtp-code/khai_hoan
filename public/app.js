@@ -262,22 +262,25 @@ function renderInternalFund(data) {
   box.innerHTML = `
     <p class="section-kicker">FLAG DONATE</p>
 
-    <h2 class="internal-heading-small">Skyward tặng sky led nước ngoài</h2>
+    <h2 class="internal-heading-small">Skyward tặng Sky LED nước ngoài</h2>
 
     <p class="internal-note">
-      Từng địa điểm sẽ được mở khoá khi donate đạt cột mốc mới. Chi phí được chi trả bằng quỹ riêng của team.
+      Project nội bộ: khi donate tăng thêm đạt mốc, Skyward sẽ tặng Sky thêm flag LED cộng hưởng.
     </p>
 
     <div class="internal-list flag-list flag-list-vertical">
       ${milestones.map((m) => {
         const reached = !!m.reached;
 
-        const milestoneLabel = Number(m.amount || 0) >= 1000000
-          ? `${Math.round(Number(m.amount || 0) / 1000000)}TR`
-          : money(Number(m.amount || 0)).replace(' đ', '');
+        let milestoneLabel = '';
 
-        const rawTitle = m.shortTitle || m.title || '';
-        const cleanTitle = rawTitle.replace(/^LED\s*/i, '').trim();
+        if (Number(m.amount || 0) === 80000000) {
+          milestoneLabel = 'Đạt mốc Dậy Sóng';
+        } else if (Number(m.amount || 0) === 150000000) {
+          milestoneLabel = 'Đạt mốc Khải Hoàn';
+        } else {
+          milestoneLabel = m.label || '';
+        }
 
         return `
           <article class="internal-item flag-item flag-item-vertical ${reached ? 'reached' : 'locked'}">
@@ -286,9 +289,15 @@ function renderInternalFund(data) {
             </div>
 
             <div class="internal-content flag-content-center">
-              <div class="internal-label">Góp ${milestoneLabel}</div>
-              <div class="internal-title flag-title-small">LED ${escapeHtml(cleanTitle)}</div>
-              <div class="flag-status">${reached ? 'Đã mở flag' : 'Chưa mở flag'}</div>
+              <div class="internal-label">${escapeHtml(milestoneLabel)}</div>
+
+              <div class="internal-title flag-title-small">
+                ${escapeHtml(m.shortTitle || m.title)}
+              </div>
+
+              <div class="flag-status">
+                ${reached ? 'Đã mở flag' : 'Chưa mở flag'}
+              </div>
             </div>
           </article>
         `;
