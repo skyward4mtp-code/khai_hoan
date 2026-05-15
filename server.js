@@ -36,7 +36,7 @@ const TRACKING_CONFIG = {
 
   // Link YouTube để phát nhạc trên web.
   // Có thể dùng dạng https://www.youtube.com/watch?v=VIDEO_ID hoặc https://youtu.be/VIDEO_ID
-  musicYoutubeUrl: 'https://www.youtube.com/watch?v=THAY_VIDEO_ID_CUA_BAN',
+  musicYoutubeUrl: 'https://www.youtube.com/watch?v=opejV49frug',
 
   // Các mốc target hiển thị trên cột tiến độ.
   milestones: [
@@ -56,13 +56,13 @@ const TRACKING_CONFIG = {
       amount: 200000000,
       title: 'VIỄN CHINH',
       subtitle: '200.000.000 VNĐ',
-      items: ['Phục vụ stream', 'LED Hà Nội', 'Roadshow xe bus Hà Nội', 'LED TP.HCM', 'LED Đà Nẵng', 'Roadshow xe bus TP.HCM'],
+      items: ['Phục vụ stream', 'LED Hà Nội', 'Roadshow xe bus Hà Nội', 'LED TP.HCM 1','LED TP.HCM 2', 'LED Đà Nẵng', 'Roadshow xe bus TP.HCM'],
     },
     {
       amount: 220000000,
       title: 'KHẢI HOÀN',
       subtitle: '220.000.000 VNĐ',
-      items: ['Phục vụ stream', 'LED Hà Nội', 'Roadshow xe bus Hà Nội', 'LED TP.HCM', 'LED Đà Nẵng', 'Roadshow xe bus TP.HCM', 'LED Thái Lan', 'LED Nhật Bản'],
+      items: ['Phục vụ stream', 'LED Hà Nội', 'Roadshow xe bus Hà Nội', 'LED TP.HCM 1','LED TP.HCM 2', 'LED Đà Nẵng', 'Roadshow xe bus TP.HCM', 'LED Thái Lan', 'LED Nhật Bản'],
     },
   ],
 
@@ -73,14 +73,14 @@ const TRACKING_CONFIG = {
       amount: 80000000,
       title: 'LED Trung Quốc',
       shortTitle: 'LED Trung Quốc',
-      description: 'Góp 50TR → LED Trung Quốc.',
+      description: 'Tổng donate tăng 80M → LED Trung Quốc.',
       unlockedText: 'LED Trung Quốc.',
     },
     {
       amount: 150000000,
       title: 'LED Mỹ',
       shortTitle: 'LED Mỹ',
-      description: 'Góp 100TR → LED Mỹ.',
+      description: 'Tổng donate tăng 150M → LED Mỹ.',
       unlockedText: 'LED Mỹ.',
     },
   ],
