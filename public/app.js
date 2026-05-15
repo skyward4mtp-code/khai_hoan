@@ -255,7 +255,7 @@ if (data.nextMilestone) {
 
   const items = data.unlockedItems || [];
   unlocked.innerHTML = items.length ? `
-    <p class="section-kicker">YEAH, CHÚNG TA ĐÃ CÓ...</p>
+    <p class="section-kicker">YEAH, CHÚNG TA </p>
     <h2>Đã mở khóa</h2>
     <div class="unlock-list">${items.map(item => `<span>${escapeHtml(item)}</span>`).join('')}</div>
     <div class="comeback">Để chờ đón <strong>TÙNG COMEBACK</strong></div>
@@ -343,7 +343,7 @@ function render(data) {
   $('progressText').innerHTML = `Đạt <strong>${percent.toFixed(2)}%</strong> target Khải Hoàn`;
   $('remainText').textContent = data.targetAmount > data.totalAmount
     ? `Còn ${money(data.targetAmount - data.totalAmount)}`
-    : 'Đã đạt target 220M';
+    : 'Đã đạt target 270M';
   renderPercentScale(percent);
 
   $('lastRefresh').textContent = data.lastRefreshAt ? `Quét lần cuối: ${dt(data.lastRefreshAt)}` : 'Chưa quét';
