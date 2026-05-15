@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Khải Hoàn Fund Tracker - Skyward</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="space-bg" aria-hidden="true">
+    <span class="starfield"></span>
+    <span class="haze haze-left"></span>
+    <span class="haze haze-right"></span>
+    <span class="meteor m1"></span>
+    <span class="meteor m2"></span>
+    <span class="meteor m3"></span>
+    <span class="meteor m4"></span>
+    <span class="scanline"></span>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="https://www.facebook.com/skywardmtp" target="_blank" rel="noopener">SKYWARD</a>
+    <span class="brand-sub">ALL ABOUT SƠN TÙNG M-TP</span>
+    <nav>
+      <a href="#overview" class="active">Tổng quan</a>
+      <a href="#transactions">Giao dịch</a>
+      <a href="#topdonor">Top donor</a>
+      <a href="#gift">Gift donor</a>
+      
+      <button id="navDonateBtn" class="nav-donate">Donate QR</button>
+	  <button id="musicToggleBtn" class="btn ghost" type="button">🔈 Tắt nhạc</button>
+    </nav>
+  </header>
+
+  <main class="page" id="overview">
+    <section class="hero">
+      <div class="hero-mark">M-TP</div>
+      <p class="hero-kicker">SKYWARD FUND TRACKER</p>
+      <div class="hero-title-wrap" aria-label="KHẢI HOÀN">
+        <img class="hero-title-image" src="/assets/khai-hoan-title.png" alt="KHẢI HOÀN" />
+      </div>
+      <p class="return-text">THE RETURN</p>
+      <a class="hero-pill" href="https://www.facebook.com/skywardmtp" target="_blank" rel="noopener">SKYWARD – ALL ABOUT SƠN TÙNG M-TP</a>
+      <p class="hero-desc">Theo dõi donate realtime, mở khóa từng mốc support và cùng chờ đón Tùng comeback. Tiến độ đã bao gồm phần trích quỹ nền 70M.</p>
+      <div class="hero-actions">
+        <button id="donateQrBtn" class="btn primary">Donate / Hiện QR</button>
+        <a id="downloadExcelBtn" class="btn ghost" href="/download/excel">📥 Tải thông tin sao kê</a>
+        
+        <a id="giftFormLink" class="btn gift" href="https://docs.google.com/forms/d/1Om-Qa5STVAwZBTYeqRL05rj0le62FFVexXSPpQqOn38/edit" target="_blank" rel="noopener">🎁 Form nhận gift donor từ 200K</a>
+      </div>
+    </section>
+
+    <div id="musicPlayer" class="youtube-bg-player" aria-hidden="true"></div>
+
+    <button id="floatingSpeakerBtn" class="floating-speaker" type="button" aria-label="Tắt hoặc bật nhạc nền">🔈</button>
+
+    <section class="stats-row">
+      <article class="stat-card hud-card">
+        <div class="stat-icon">⌁</div>
+        <div>
+          <span>Tổng đã ghi nhận</span>
+          <strong id="totalAmount">0 đ</strong>
+        </div>
+      </article>
+      <article class="stat-card hud-card">
+        <div class="stat-icon">◎</div>
+        <div>
+          <span>Mục tiêu</span>
+          <strong id="targetAmount">0 đ</strong>
+        </div>
+      </article>
+      <article class="stat-card hud-card">
+        <div class="stat-icon">▥</div>
+        <div>
+          <span>Số giao dịch</span>
+          <strong id="transactionCount">0</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="main-panel">
+        <section class="hud-card progress-panel">
+          <div class="panel-title-row">
+            <div>
+              <p class="section-kicker">TIẾN ĐỘ MỤC TIÊU</p>
+              <h2>Target Khải Hoàn 220M</h2>
+              <p id="progressText" class="muted">Đạt 0%</p>
+              <div id="baseFundNote" class="base-fund-note">Đã trích quỹ nền 70.000.000đ. Tiến độ bắt đầu tính từ mốc 70M, các giao dịch donate mới sẽ được cộng thêm vào mốc này.</div>
+            </div>
+            <strong id="remainText" class="remain">Còn 0 đ</strong>
+          </div>
+
+          <div class="progress-shell">
+            <div id="progressBar" class="progress-fill"></div>
+            <span id="progressBadge" class="progress-badge">0%</span>
+          </div>
+          <div id="percentScale" class="percent-scale"></div>
+
+          <div class="journey-head">
+            <div>
+              <p class="section-kicker">HÀNH TRÌNH TARGET 220M</p>
+              <h2>Unlock từng mốc support</h2>
+            </div>
+            <span id="nextMilestoneText">Đang cập nhật</span>
+          </div>
+          <div id="milestoneRail" class="milestone-rail"></div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <section id="unlockedBox" class="hud-card unlocked-box"></section>
+        <section id="internalFundBox" class="hud-card internal-fund-box"></section>
+      </aside>
+    </section>
+
+    <section class="lower-grid">
+      <div class="lower-side-stack">
+        <section id="topdonor" class="hud-card top-card">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">TOP DONOR</p>
+              <h2>Top 10 giao dịch lớn nhất</h2>
+            </div>
+          </div>
+          <div id="top10" class="top-list"></div>
+        </section>
+
+        <section id="gift" class="hud-card gift-box">
+          <p class="section-kicker">GIFT DONOR TỪ 200K</p>
+          <h2>Form nhận quà</h2>
+          <p>Gift donor áp dụng cho giao dịch donate từ 200.000đ. Bấm form để gửi thông tin nhận quà.</p>
+          <a id="giftFormLink2" class="btn gift wide" href="#https://docs.google.com/forms/d/1Om-Qa5STVAwZBTYeqRL05rj0le62FFVexXSPpQqOn38/edit" target="_blank" rel="noopener">🎁 Form nhận gift donor từ 200K</a>
+          <small>(Google Form)</small>
+        </section>
+      </div>
+
+      <section id="transactions" class="hud-card table-card">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">LỊCH SỬ GIAO DỊCH</p>
+            <h2>Biến động mới nhất</h2>
+          </div>
+          <span id="lastRefresh">Chưa quét</span>
+        </div>
+        <div id="errorBox" class="error hidden"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Thời gian</th>
+                <th>Nhận tiền từ</th>
+                <th>Số tiền</th>
+                <th>Lời nhắn</th>
+              </tr>
+            </thead>
+            <tbody id="recentRows"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button id="prevPage" class="page-btn">← Trước</button>
+          <span id="pageInfo">Trang 1/1</span>
+          <button id="nextPage" class="page-btn">Sau →</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="donateModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="donateModalTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card donate-card">
+      <button class="modal-close" type="button" data-close-modal aria-label="Đóng">×</button>
+      <div class="modal-grid">
+        <div class="qr-preview">
+          <img src="/assets/donate-qr.png" alt="QR donate Quỹ Support Sơn Tùng M-TP" />
+        </div>
+        <div class="qr-info">
+          <p class="section-kicker">DONATE SUPPORT</p>
+          <h2 id="donateModalTitle">Quỹ Support Sơn Tùng M-TP</h2>
+          <p>Quét QR để donate. Hệ thống sẽ tự ghi nhận các giao dịch cộng tiền và cập nhật tiến độ target.</p>
+          <div class="bank-box">
+            <span>STK</span><strong>63258321</strong>
+            <span>CTK</span><strong>ĐỖ NGỌC HÂN</strong>
+            <span>Ngân hàng</span><strong>CAKE</strong>
+          </div>
+          <p class="qr-note">Gift donor áp dụng cho giao dịch donate từ 200.000đ. Sau khi donate, bấm nút form nhận gift để gửi thông tin.</p>
+          <a id="giftFormLink3" class="btn gift wide" href="#" target="_blank" rel="noopener">🎁 Form nhận gift donor từ 200K</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="milestoneToast" class="milestone-toast hidden" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

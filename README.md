@@ -1,10 +1,17 @@
-# Cake Tracker Khải Hoàn - v12
+# Cake Tracker - v15 Flag Donate Mobile
 
-Web tracking donate cho quỹ Skyward.
+Bản v15:
+
+- Dùng đúng ảnh `public/assets/khai-hoan-title.png` làm tiêu đề hero, không render chữ đè lên ảnh.
+- Nền đen, ưu tiên hiển thị đẹp trên điện thoại.
+- Phần `FLAG DONATE` có 2 mốc chia đôi màn hình trên mobile:
+  - Donate tăng thêm 50M → Skyward tặng Sky LED Trung Quốc.
+  - Donate tăng thêm 100M → Skyward tặng Sky LED Mỹ.
+- Giữ các chức năng: tracking sao kê Cake, chỉ tính giao dịch nhận tiền, Excel local, QR donate, nhạc nền YouTube.
 
 ## Chạy local
 
-```bat
+```bash
 npm install
 npm start
 ```
@@ -15,56 +22,37 @@ Mở:
 http://localhost:3000
 ```
 
-## Các thay đổi chính v12
+## Cấu hình
 
-- Chỉ tính giao dịch cộng tiền / nhận tiền.
-- Giao dịch chuyển đi dạng `Chuyển tiền`, `Tới ...`, số tiền âm sẽ bị loại khỏi tổng, progress, top donor, bảng giao dịch và Excel sau lần quét lại.
-- Nhạc YouTube tự phát nền khi vào web, âm lượng nhỏ.
-- Có biểu tượng loa ở góc phải dưới để tắt/bật nhạc.
-- Đầu trang có nút `Lấy file Excel` tải file `data/transactions.xlsx`.
-
-## Chỗ sửa cấu hình
-
-Mở `server.js`, tìm `TRACKING_CONFIG`.
-
-### Sửa link sao kê Cake
+Sửa trực tiếp trong `server.js`, mục `TRACKING_CONFIG`:
 
 ```js
 encodedId: '318535339',
+startAt: '2026-05-15T00:00:00+07:00',
+targetAmount: 220000000,
+initialFundAmount: 70000000,
+giftFormUrl: 'https://forms.gle/...',
+musicYoutubeUrl: 'https://www.youtube.com/watch?v=...',
 ```
 
-### Sửa link YouTube phát nền
+Mốc Flag Donate:
 
 ```js
-musicYoutubeUrl: 'https://www.youtube.com/watch?v=THAY_VIDEO_ID_CUA_BAN',
+internalFundMilestones: [
+  {
+    amount: 50000000,
+    title: 'LED Trung Quốc',
+    description: 'Đạt mốc donate tăng thêm 50M → Skyward tặng Sky LED Trung Quốc.',
+  },
+  {
+    amount: 100000000,
+    title: 'LED Mỹ',
+    description: 'Đạt mốc donate tăng thêm 100M → Skyward tặng Sky LED Mỹ.',
+  },
+]
 ```
 
-Có thể dùng dạng:
 
-```js
-musicYoutubeUrl: 'https://youtu.be/VIDEO_ID',
-```
-
-### Sửa âm lượng nhạc
-
-Mở `public/app.js`, tìm:
-
-```js
-const MUSIC_VOLUME = 12;
-```
-
-Giá trị từ `0` đến `100`. Để nhạc nền nhỏ nên dùng khoảng `8` đến `15`.
-
-## Lưu ý về autoplay
-
-Trình duyệt có thể chặn autoplay có tiếng trong một số trường hợp. Code đã tự gọi phát nền âm lượng nhỏ; nếu trình duyệt chặn, người dùng chỉ cần bấm biểu tượng loa một lần để bật nhạc.
-
-## File Excel
-
-File Excel nằm ở:
-
-```text
-data/transactions.xlsx
-```
-
-Nút `Lấy file Excel` sẽ tải file này về.
+## v16
+- Polish lại typography phần FLAG DONATE.
+- Giữ layout chia đôi trên mobile nhưng giảm cỡ chữ, chống tràn chữ và nhìn gọn hơn.
