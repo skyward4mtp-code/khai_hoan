@@ -208,34 +208,50 @@ function renderMilestones(data) {
   const nextText = $('nextMilestoneText');
 
   rail.innerHTML = milestones.map((m, index) => {
-    const unlockPercent = target > 0 ? Math.min(100, (Number(m.amount || 0) / target) * 100) : 0;
-    const currentToMilestone = Number(m.amount || 0) > 0 ? Math.min(100, (total / Number(m.amount || 0)) * 100) : 0;
-    const isUnlocked = !!m.reached;
-    return `
-      <article class="milestone ${isUnlocked ? 'unlocked' : 'locked'}">
-        <span class="lock-badge">🔒</span>
-        <div class="milestone-icon">${isUnlocked ? (index === 0 ? '🔥' : '✓') : '🔒'}</div>
-        <h3>${escapeHtml(m.title)}</h3>
-        <div class="target">${escapeHtml(m.subtitle || money(m.amount))}</div>
-        <div class="milestone-items">
-          ${(m.items || []).map(item => `<span>${escapeHtml(item)}</span>`).join('')}
-        </div>
-        <div class="milestone-state">
-          ${isUnlocked ? '✓ ĐÃ MỞ KHÓA' : `Còn ${money(m.remaining || 0)}`}
-        </div>
-        <div class="card-percent">
-          <span>${unlockPercent.toFixed(2).replace('.00', '')}%</span>
-          <div class="card-percent-bar"><div class="card-percent-fill" style="width:${currentToMilestone}%"></div></div>
-        </div>
-      </article>
-    `;
-  }).join('');
+  const unlockPercent = target > 0 ? Math.min(100, (Number(m.amount || 0) / target) * 100) : 0;
+  const currentToMilestone = Number(m.amount || 0) > 0 ? Math.min(100, (total / Number(m.amount || 0)) * 100) : 0;
+  const isUnlocked = !!m.reached;
+  return `
+    <article class="milestone ${isUnlocked ? 'unlocked' : 'locked'}">
+      <span class="lock-badge">🔒</span>
+      <div class="milestone-icon">${isUnlocked ? (index === 0 ? '🔥' : '✓') : '🔒'}</div>
+      <h3>${escapeHtml(m.title)}</h3>
+      <div class="target">${escapeHtml(m.subtitle || money(m.amount))}</div>
+      <div class="milestone-items">
+        ${(m.items || []).map(item => `<span>${escapeHtml(item)}</span>`).join('')}
+      </div>
+      <div class="milestone-state">
+        ${isUnlocked ? '✓ ĐÃ MỞ KHÓA' : `Còn ${money(m.remaining || 0)}`}
+      </div>
+      <div class="card-percent">
+        <span>${unlockPercent.toFixed(2).replace('.00', '')}%</span>
+        <div class="card-percent-bar"><div class="card-percent-fill" style="width:${currentToMilestone}%"></div></div>
+      </div>
+    </article>
+  `;
+}).join('');
 
-  if (data.nextMilestone) {
-    nextText.textContent = `Mốc tiếp theo: ${data.nextMilestone.title} · còn ${money(data.nextMilestone.remaining || 0)}`;
-  } else {
-    nextText.textContent = 'Đã hoàn thành target Khải Hoàn';
-  }
+/* Xóa alert cũ để tránh bị nhân đôi khi refresh */
+const oldOverTargetAlert = document.querySelector('.over-target-alert');
+if (oldOverTargetAlert) oldOverTargetAlert.remove();
+
+/* Thêm alert mới nếu vượt target */
+const overTargetAmount = total - target;
+
+if (overTargetAmount > 0) {
+  rail.insertAdjacentHTML('afterend', `
+    <div class="over-target-alert">
+      <strong>ĐÃ VƯỢT ${money(overTargetAmount)} SO VỚI TARGET</strong>
+      <span>ADMIN ĐANG HOẢNG HỐT 😱😱😱</span>
+    </div>
+  `);
+}
+
+if (data.nextMilestone) {
+  nextText.textContent = `Mốc tiếp theo: ${data.nextMilestone.title} · còn ${money(data.nextMilestone.remaining || 0)}`;
+} else {
+  nextText.textContent = 'Đã hoàn thành target Khải Hoàn';
+}
 
   const items = data.unlockedItems || [];
   unlocked.innerHTML = items.length ? `
@@ -421,3 +437,99 @@ $('nextPage').addEventListener('click', () => { currentPage += 1; renderTransact
   await loadStatus();
   setInterval(loadStatus, 10000);
 })();
+/* =========================================================
+   MV COUNTDOWN + FIREWORKS
+========================================================= */
+
+const MV_RELEASE_TIME = new Date('2026-05-28T20:00:00+07:00').getTime();
+let fireworksStarted = false;
+
+function pad2(num) {
+  return String(num).padStart(2, '0');
+}
+
+function updateMvCountdown() {
+  const now = Date.now();
+  const diff = MV_RELEASE_TIME - now;
+
+  const daysEl = document.getElementById('cdDays');
+  const hoursEl = document.getElementById('cdHours');
+  const minutesEl = document.getElementById('cdMinutes');
+  const secondsEl = document.getElementById('cdSeconds');
+  const labelEl = document.querySelector('.mv-countdown-label');
+
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+  if (diff <= 0) {
+    daysEl.textContent = '00';
+    hoursEl.textContent = '00';
+    minutesEl.textContent = '00';
+    secondsEl.textContent = '00';
+
+    if (labelEl) {
+      labelEl.textContent = 'MV đã xuất hiện — Khải Hoàn bắt đầu!';
+    }
+
+    if (!fireworksStarted) {
+      fireworksStarted = true;
+      startFireworks();
+    }
+
+    return;
+  }
+
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  daysEl.textContent = pad2(days);
+  hoursEl.textContent = pad2(hours);
+  minutesEl.textContent = pad2(minutes);
+  secondsEl.textContent = pad2(seconds);
+}
+
+function startFireworks() {
+  const layer = document.getElementById('fireworksLayer');
+  if (!layer) return;
+
+  layer.classList.add('active');
+
+  const colors = ['#ff2633', '#ffffff', '#ffb3b8', '#ff5c66'];
+
+  const createBurst = () => {
+    const x = Math.random() * 100;
+    const y = 15 + Math.random() * 45;
+
+    for (let i = 0; i < 24; i += 1) {
+      const particle = document.createElement('span');
+      const angle = (Math.PI * 2 * i) / 24;
+      const distance = 60 + Math.random() * 80;
+
+      particle.className = 'firework-particle';
+      particle.style.left = `${x}%`;
+      particle.style.top = `${y}%`;
+      particle.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
+      particle.style.setProperty('--ty', `${Math.sin(angle) * distance}px`);
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+      layer.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 1100);
+    }
+  };
+
+  createBurst();
+  const timer = setInterval(createBurst, 650);
+
+  setTimeout(() => {
+    clearInterval(timer);
+    layer.classList.remove('active');
+  }, 10000);
+}
+
+setInterval(updateMvCountdown, 1000);
+updateMvCountdown();
