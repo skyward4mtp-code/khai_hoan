@@ -2698,3 +2698,64 @@ body {
     font-weight: 850 !important;
   }
 }
+/* =========================================================
+   FIX SIZE FLAG DONATE = UNLOCK SUMMARY
+   Dán ở cuối public/styles.css
+========================================================= */
+
+/* Dòng: SKYWARD TẶNG SKY LED NƯỚC NGOÀI
+   cho cùng size với: CHƯA MỞ KHÓA MỐC */
+#internalFundBox h2,
+#internalFundBox .internal-heading-small,
+#internalFundBox .flag-title-main,
+#internalFundBox .internal-fund-title {
+  font-size: clamp(30px, 7vw, 48px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0.02em !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  color: #ff2633 !important;
+}
+
+/* Dòng mô tả:
+   cho cùng size với: Donate sẽ được cộng dồn... */
+#internalFundBox .internal-note,
+#internalFundBox .flag-donate-desc,
+#internalFundBox p:not(.section-kicker) {
+  font-size: clamp(20px, 4.8vw, 30px) !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0 !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.66) !important;
+}
+
+/* Chữ FLAG DONATE giữ nhỏ như kicker */
+#internalFundBox .section-kicker {
+  font-size: clamp(14px, 3.5vw, 22px) !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.18em !important;
+  font-weight: 900 !important;
+  color: #ff2633 !important;
+}
+
+/* Riêng mobile */
+@media (max-width: 520px) {
+  #internalFundBox h2,
+  #internalFundBox .internal-heading-small,
+  #internalFundBox .flag-title-main,
+  #internalFundBox .internal-fund-title {
+    font-size: 34px !important;
+    line-height: 1.08 !important;
+  }
+
+  #internalFundBox .internal-note,
+  #internalFundBox .flag-donate-desc,
+  #internalFundBox p:not(.section-kicker) {
+    font-size: 23px !important;
+    line-height: 1.45 !important;
+  }
+
+  #internalFundBox .section-kicker {
+    font-size: 15px !important;
+  }
+}
