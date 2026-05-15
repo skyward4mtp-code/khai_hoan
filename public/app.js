@@ -265,7 +265,7 @@ function renderInternalFund(data) {
     <h2 class="internal-heading-small">Skyward tặng sky led nước ngoài</h2>
 
     <p class="internal-note">
-      Từng địa điểm sẽ được mở khoá khi donate đạt cột mốc. Chi phí được chi trả bằng quỹ nội bộ!
+      Từng địa điểm sẽ được mở khoá khi donate đạt cột mốc mới. Chi phí được chi trả bằng quỹ riêng của team.
     </p>
 
     <div class="internal-list flag-list flag-list-vertical">
