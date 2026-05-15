@@ -2768,3 +2768,318 @@ body {
   box-shadow: none !important;
   object-fit: contain !important;
 }
+/* =========================================================
+   FIX MOBILE MILESTONE OVERLAP
+========================================================= */
+
+.milestone-card,
+.milestone-item {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  height: auto !important;
+  min-height: unset !important;
+  overflow: hidden !important;
+}
+
+.milestone-card .milestone-status,
+.milestone-item .milestone-status,
+.milestone-unlocked,
+.milestone-lock-status {
+  position: static !important;
+  display: inline-flex !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin-top: 8px !important;
+  margin-bottom: 4px !important;
+  transform: none !important;
+}
+
+.milestone-progress,
+.milestone-card-progress,
+.milestone-progress-row {
+  position: static !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  padding-top: 10px !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.milestone-progress span,
+.milestone-card-progress span,
+.milestone-progress-row span {
+  position: static !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+
+.milestone-progress-bar,
+.milestone-bar,
+.progress-mini {
+  position: relative !important;
+  width: 100% !important;
+  height: 6px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Mobile card milestone */
+@media (max-width: 640px) {
+  .milestone-grid,
+  .milestones-grid,
+  .target-milestones {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .milestone-card,
+  .milestone-item {
+    padding: 24px 18px !important;
+    border-radius: 24px !important;
+  }
+
+  .milestone-title,
+  .milestone-name {
+    font-size: 30px !important;
+    line-height: 1.08 !important;
+    margin: 0 !important;
+  }
+
+  .milestone-amount,
+  .milestone-subtitle {
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+  }
+
+  .milestone-chip,
+  .chip {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    padding: 10px 14px !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
+  .milestone-progress,
+  .milestone-card-progress,
+  .milestone-progress-row {
+    margin-top: 12px !important;
+    padding-top: 12px !important;
+    grid-template-columns: 58px 1fr !important;
+  }
+
+  .milestone-progress span,
+  .milestone-card-progress span,
+  .milestone-progress-row span {
+    font-size: 15px !important;
+    font-weight: 900 !important;
+  }
+}
+/* =========================================================
+   MV COUNTDOWN
+========================================================= */
+
+.mv-countdown {
+  width: min(760px, calc(100vw - 32px));
+  margin: 18px auto 22px;
+  padding: 18px;
+  border: 1px solid rgba(255, 38, 51, 0.35);
+  border-radius: 24px;
+  background: rgba(255, 38, 51, 0.055);
+  box-shadow: 0 0 22px rgba(255, 0, 0, 0.08);
+  text-align: center;
+}
+
+.mv-countdown-label {
+  margin: 0 0 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.mv-countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.mv-countdown-item {
+  padding: 12px 8px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255, 38, 51, 0.25);
+}
+
+.mv-countdown-item strong {
+  display: block;
+  color: #ff2633;
+  font-size: clamp(24px, 6vw, 42px);
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+}
+
+.mv-countdown-item span {
+  display: block;
+  margin-top: 7px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+}
+
+@media (max-width: 520px) {
+  .mv-countdown {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .mv-countdown-grid {
+    gap: 8px;
+  }
+
+  .mv-countdown-item {
+    padding: 10px 5px;
+    border-radius: 14px;
+  }
+
+  .mv-countdown-item strong {
+    font-size: 24px;
+  }
+
+  .mv-countdown-item span {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* =========================================================
+   FIREWORKS
+========================================================= */
+
+.fireworks-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+  display: none;
+}
+
+.fireworks-layer.active {
+  display: block;
+}
+
+.firework-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  animation: fireworkBoom 1.05s ease-out forwards;
+  box-shadow: 0 0 12px currentColor;
+}
+
+@keyframes fireworkBoom {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)))
+      scale(0.3);
+  }
+}
+
+/* =========================================================
+   OVER TARGET ALERT
+========================================================= */
+
+.over-target-alert {
+  margin: 22px 0 0;
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 38, 51, 0.55);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 38, 51, 0.16), transparent 58%),
+    rgba(255, 38, 51, 0.06);
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.14);
+}
+
+.over-target-alert strong {
+  display: block;
+  color: #ff2633;
+  font-size: clamp(20px, 5vw, 38px);
+  line-height: 1.12;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.over-target-alert span {
+  display: block;
+  margin-top: 10px;
+  color: #fff;
+  font-size: clamp(18px, 4.6vw, 30px);
+  line-height: 1.2;
+  font-weight: 900;
+}
+/* ===== OVER TARGET ALERT ===== */
+
+.over-target-alert {
+  margin: 22px 0 0;
+  padding: 18px 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 38, 51, 0.55);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 38, 51, 0.16), transparent 58%),
+    rgba(255, 38, 51, 0.06);
+  text-align: center;
+  box-shadow: 0 0 24px rgba(255, 0, 0, 0.12);
+}
+
+.over-target-alert strong {
+  display: block;
+  color: #ff2633;
+  font-size: clamp(18px, 4.8vw, 32px);
+  line-height: 1.15;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.over-target-alert span {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: clamp(16px, 4vw, 26px);
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+@media (max-width: 520px) {
+  .over-target-alert {
+    margin-top: 18px;
+    padding: 16px 12px;
+    border-radius: 20px;
+  }
+
+  .over-target-alert strong {
+    font-size: 20px;
+  }
+
+  .over-target-alert span {
+    font-size: 17px;
+  }
+}
