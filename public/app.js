@@ -45,7 +45,7 @@ let youtubeApiRequested = false;
 let youtubePlayer = null;
 let musicMuted = false;
 let musicReady = false;
-const MUSIC_VOLUME = 12; // âm lượng nền nhỏ, sửa tại đây nếu muốn lớn hơn/nhỏ hơn
+const MUSIC_VOLUME = 20; // âm lượng nền nhỏ, sửa tại đây nếu muốn lớn hơn/nhỏ hơn
 
 function syncSpeakerButtons() {
   const icon = musicMuted ? '🔇' : '🔈';
@@ -262,10 +262,10 @@ function renderInternalFund(data) {
   box.innerHTML = `
     <p class="section-kicker">FLAG DONATE</p>
 
-    <h2 class="internal-heading-small">Skyward tặng Sky LED cộng hưởng</h2>
+    <h2 class="internal-heading-small">Skyward tặng sky led nước ngoài</h2>
 
     <p class="internal-note">
-      Project nội bộ: khi donate tăng thêm đạt mốc, Skyward sẽ tặng Sky thêm flag LED cộng hưởng.
+      Từng địa điểm sẽ được mở khoá khi donate đạt cột mốc. Chi phí được chi trả bằng quỹ nội bộ!
     </p>
 
     <div class="internal-list flag-list flag-list-vertical">
