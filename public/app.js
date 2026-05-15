@@ -262,10 +262,10 @@ function renderInternalFund(data) {
   box.innerHTML = `
     <p class="section-kicker">FLAG DONATE</p>
 
-    <h2 class="internal-heading-small">Skyward tặng Sky LED nước ngoài</h2>
+    <h2 class="internal-heading-small">Skyward tặng sky led nước ngoài</h2>
 
     <p class="internal-note">
-      Project nội bộ: khi donate tăng thêm đạt mốc, Skyward sẽ tặng Sky thêm flag LED cộng hưởng.
+      Từng địa điểm sẽ được mở khoá khi donate đạt cột mốc mới. Chi phí được chi trả bằng quỹ riêng của team.
     </p>
 
     <div class="internal-list flag-list flag-list-vertical">
