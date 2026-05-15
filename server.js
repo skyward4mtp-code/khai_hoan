@@ -17,7 +17,7 @@ const TRACKING_CONFIG = {
 
   // Chỉ ghi nhận giao dịch từ mốc này trở đi.
   // Định dạng khuyến nghị: YYYY-MM-DDTHH:mm:ss+07:00
-  startAt: '2026-05-15T00:00:00+07:00',
+  startAt: '2026-05-15T18:30:00+07:00',
 
   // Target quỹ để tính thanh tiến độ.
   targetAmount: 220000000,
