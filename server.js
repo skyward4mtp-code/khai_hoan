@@ -20,7 +20,7 @@ const TRACKING_CONFIG = {
   startAt: '2026-05-15T18:30:00+07:00',
 
   // Target quỹ để tính thanh tiến độ.
-  targetAmount: 220000000,
+  targetAmount: 270000000,
 
   // Quỹ nền đã trích sẵn.
   // Hệ thống sẽ bắt đầu tính tiến độ từ mốc này, sau đó cộng thêm các giao dịch nhận tiền mới.
@@ -64,6 +64,12 @@ const TRACKING_CONFIG = {
       subtitle: '220.000.000 VNĐ',
       items: ['Phục vụ stream', 'LED Hà Nội',  'LED TP.HCM 1', 'LED Đà Nẵng', 'Roadshow xe bus Hà Nội','LED TP.HCM 2','Roadshow xe bus TP.HCM', 'LED Thái Lan', 'LED Nhật Bản'],
     },
+    {
+  amount: 270000000,
+  title: 'BÍ MẬT',
+  subtitle: '270.000.000 VNĐ',
+  items: ['Sẽ được bật mí sau'],
+},
   ],
 
   // FLAG DONATE: các mốc quỹ nội bộ Skyward tặng thêm cho Sky.
