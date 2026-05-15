@@ -582,9 +582,12 @@ async function refreshTransactions() {
       .filter(row => Number.isNaN(startAt.getTime()) || new Date(row.time) >= startAt)
       .sort((a, b) => new Date(a.time) - new Date(b.time));
 
-    const mergedRows = dedupeRows([...existingRows, ...newRows]);
-    await writeRowsToExcel(mergedRows);
-    cache.rows = mergedRows;
+    const mergedRows = dedupeRows([...existingRows, ...newRows])
+  .filter(row => Number.isNaN(startAt.getTime()) || new Date(row.time) >= startAt)
+  .filter(row => Number(row.amount || 0) > 0);
+
+await writeRowsToExcel(mergedRows);
+cache.rows = mergedRows;
     cache.lastRefreshAt = new Date().toISOString();
     return { added: newRows.length, skipped: false };
   } catch (error) {
