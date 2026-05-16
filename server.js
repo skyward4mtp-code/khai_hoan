@@ -442,15 +442,29 @@ function setupWorksheet(ws) {
 
 async function ensureWorkbook() {
   const workbook = new ExcelJS.Workbook();
-  if (fs.existsSync(EXCEL_PATH)) {
-    await workbook.xlsx.readFile(EXCEL_PATH);
-    let ws = workbook.getWorksheet('Transactions');
-    if (!ws) ws = workbook.addWorksheet('Transactions');
-    setupWorksheet(ws);
-    return { workbook, worksheet: ws };
+
+  try {
+    if (fs.existsSync(EXCEL_PATH) && fs.statSync(EXCEL_PATH).size > 0) {
+      await workbook.xlsx.readFile(EXCEL_PATH);
+
+      let ws = workbook.getWorksheet('Transactions');
+      if (!ws) ws = workbook.addWorksheet('Transactions');
+
+      setupWorksheet(ws);
+
+      return { workbook, worksheet: ws };
+    }
+
+    console.log('Excel file missing or empty. Creating new workbook...');
+  } catch (err) {
+    console.warn('Cannot read Excel file. Recreating workbook:', err.message);
   }
-  const ws = setupWorksheet(workbook.addWorksheet('Transactions'));
+
+  const ws = workbook.addWorksheet('Transactions');
+  setupWorksheet(ws);
+
   await workbook.xlsx.writeFile(EXCEL_PATH);
+
   return { workbook, worksheet: ws };
 }
 
